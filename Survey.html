@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Математический Опрос</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Математический Опрос</h1>
+    <form method="POST" action="/">
+        <label for="question1">Как часто вы используете умножение в повседневной жизни?</label><br>
+        <input type="text" id="question1" name="question1"><br><br>
+        
+        <label for="question2">Насколько хорошо вы понимаете уравнения?</label><br>
+        <input type="text" id="question2" name="question2"><br><br>
+        
+        <label for="question3">Насколько легко вам дается решение задач с отрицательными числами (например, -1)?</label><br>
+        <input type="text" id="question3" name="question3"><br><br>
+        
+        <label for="question4">Как часто вы используете калькулятор для решения математических задач?</label><br>
+        <input type="text" id="question4" name="question4"><br><br>
+        
+        <label for="question5">Насколько быстро вы решаете задачи на сложение и вычитание?</label><br>
+        <input type="text" id="question5" name="question5"><br><br>
+        
+        <button type="submit">Отправить</button>
+    </form>
+</body>
+</html>
