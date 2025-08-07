@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информация о сервере - 8B4T</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="{{ url_for('index') }}" class="logo-link">
+                    <span class="logo-text">8B4T</span>
+                    <span class="logo-subtitle">FUTURE</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}" class="nav-link">Главная</a>
+                {% if session.user_id %}
+                    <a href="{{ url_for('dashboard') }}" class="nav-link">Панель</a>
+                    <a href="{{ url_for('logout') }}" class="nav-link">Выход</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="nav-link">Вход</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="server-info-main">
+        <div class="container">
+            <div class="server-info-header">
+                <h1 class="server-info-title">Информация о сервере</h1>
+                <p class="server-info-subtitle">Подробная информация о нашем футуристическом мире</p>
+            </div>
+
+            <!-- Основная информация -->
+            <section class="server-section">
+                <h2 class="section-title">Основная информация</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon">🌐</div>
+                        <h3>Адрес сервера</h3>
+                        <p class="info-value">8b4t.duckdns.org</p>
+                        <p class="info-description">Основной домен сервера</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🔌</div>
+                        <h3>Порт</h3>
+                        <p class="info-value">55555</p>
+                        <p class="info-description">Порт для подключения</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">📱</div>
+                        <h3>Версия</h3>
+                        <p class="info-value">1.20.1</p>
+                        <p class="info-description">Версия Minecraft</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">👥</div>
+                        <h3>Игроки</h3>
+                        <p class="info-value" id="current-players">-</p>
+                        <p class="info-description">Текущее количество игроков</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Статус сервера -->
+            <section class="server-section">
+                <h2 class="section-title">Статус сервера</h2>
+                <div class="status-container">
+                    <div class="status-card">
+                        <div class="status-header">
+                            <div class="status-indicator online" id="serverStatusIndicator">
+                                <span class="status-dot"></span>
+                                <span class="status-text" id="serverStatusText">Онлайн</span>
+                            </div>
+                        </div>
+                        <div class="status-details">
+                            <div class="status-item">
+                                <span class="status-label">Аптайм:</span>
+                                <span class="status-value" id="serverUptime">Загрузка...</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-label">TPS:</span>
+                                <span class="status-value" id="serverTPS">20.0</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-label">Пинг:</span>
+                                <span class="status-value" id="serverPing">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Возможности сервера -->
+            <section class="server-section">
+                <h2 class="section-title">Возможности сервера</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🏙️</div>
+                        <h3>Киберпанк города</h3>
+                        <ul class="feature-list">
+                            <li>Неоновые небоскребы</li>
+                            <li>Голографические рекламы</li>
+                            <li>Подземные туннели</li>
+                            <li>Технологические районы</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <h3>ИИ системы</h3>
+                        <ul class="feature-list">
+                            <li>Умные торговцы</li>
+                            <li>Автоматические фермы</li>
+                            <li>Системы безопасности</li>
+                            <li>Персональные ассистенты</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Энергетические сети</h3>
+                        <ul class="feature-list">
+                            <li>Солнечные панели</li>
+                            <li>Ядерные реакторы</li>
+                            <li>Энергетические щиты</li>
+                            <li>Телепортация</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3>Космические станции</h3>
+                        <ul class="feature-list">
+                            <li>Орбитальные базы</li>
+                            <li>Космические корабли</li>
+                            <li>Лунные колонии</li>
+                            <li>Межпланетные порталы</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔬</div>
+                        <h3>Научные лаборатории</h3>
+                        <ul class="feature-list">
+                            <li>Генетические эксперименты</li>
+                            <li>Квантовые компьютеры</li>
+                            <li>Биотехнологии</li>
+                            <li>Нанотехнологии</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌌</div>
+                        <h3>Порталы и измерения</h3>
+                        <ul class="feature-list">
+                            <li>Квантовые порталы</li>
+                            <li>Параллельные миры</li>
+                            <li>Временные петли</li>
+                            <li>Измерения будущего</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Правила сервера -->
+            <section class="server-section">
+                <h2 class="section-title">Правила сервера</h2>
+                <div class="rules-container">
+                    <div class="rules-grid">
+                        <div class="rule-card">
+                            <div class="rule-icon">🛡️</div>
+                            <h3>Безопасность</h3>
+                            <p>Запрещено использование читов, модов и эксплойтов. Уважайте других игроков.</p>
+                        </div>
+                        <div class="rule-card">
+                            <div class="rule-icon">🏗️</div>
+                            <h3>Строительство</h3>
+                            <p>Стройте в киберпанк стиле. Избегайте разрушения чужих построек.</p>
+                        </div>
+                        <div class="rule-card">
+                            <div class="rule-icon">💬</div>
+                            <h3>Общение</h3>
+                            <p>Используйте вежливую речь. Запрещены оскорбления и спам.</p>
+                        </div>
+                        <div class="rule-card">
+                            <div class="rule-icon">🎮</div>
+                            <h3>Игровой процесс</h3>
+                            <p>Следуйте тематике сервера. Участвуйте в событиях и активностях.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Инструкция по подключению -->
+            <section class="server-section">
+                <h2 class="section-title">Как подключиться</h2>
+                <div class="connection-guide">
+                    <div class="guide-steps">
+                        <div class="guide-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Установите Minecraft</h3>
+                                <p>Убедитесь, что у вас установлена версия Minecraft 1.20.1</p>
+                            </div>
+                        </div>
+                        <div class="guide-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Запустите игру</h3>
+                                <p>Запустите Minecraft и войдите в свой аккаунт</p>
+                            </div>
+                        </div>
+                        <div class="guide-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Перейдите в мультиплеер</h3>
+                                <p>Нажмите кнопку "Multiplayer" в главном меню</p>
+                            </div>
+                        </div>
+                        <div class="guide-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Добавьте сервер</h3>
+                                <p>Нажмите "Add Server" и введите адрес: <strong>8b4t.duckdns.org:55555</strong></p>
+                            </div>
+                        </div>
+                        <div class="guide-step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h3>Подключитесь</h3>
+                                <p>Нажмите "Done" и затем "Join Server"</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="connection-actions">
+                        <button class="btn btn-primary" onclick="copyServerAddress()">
+                            <span class="btn-icon">📋</span>
+                            Копировать адрес сервера
+                        </button>
+                        <button class="btn btn-secondary" onclick="openMinecraft()">
+                            <span class="btn-icon">🎮</span>
+                            Запустить Minecraft
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/server-info.js') }}"></script>
+</body>
+</html>

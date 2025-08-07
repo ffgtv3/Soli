@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Страница не найдена - 8B4T</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="{{ url_for('index') }}" class="logo-link">
+                    <span class="logo-text">8B4T</span>
+                    <span class="logo-subtitle">FUTURE</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}" class="nav-link">Главная</a>
+                {% if session.user_id %}
+                    <a href="{{ url_for('dashboard') }}" class="nav-link">Панель</a>
+                    <a href="{{ url_for('logout') }}" class="nav-link">Выход</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="nav-link">Вход</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="error-main">
+        <div class="error-container">
+            <div class="error-content">
+                <div class="error-code">404</div>
+                <h1 class="error-title">Страница не найдена</h1>
+                <p class="error-description">
+                    Похоже, что запрашиваемая страница была удалена или перемещена в другое измерение.
+                </p>
+                <div class="error-actions">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary">Вернуться на главную</a>
+                    <a href="{{ url_for('server_info') }}" class="btn btn-secondary">Информация о сервере</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
