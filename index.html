@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8B4T - Футуристический Minecraft Сервер</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">8B4T</span>
+                <span class="logo-subtitle">FUTURE</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link">Главная</a>
+                <a href="#server" class="nav-link">Сервер</a>
+                <a href="#features" class="nav-link">Возможности</a>
+                <a href="#join" class="nav-link">Присоединиться</a>
+                <a href="register.html" class="nav-link">Регистрация</a>
+                <a href="login.html" class="nav-link login-btn">Вход</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="title-line">ДОБРО ПОЖАЛОВАТЬ В</span>
+                        <span class="title-main">8B4T</span>
+                        <span class="title-subtitle">ФУТУРИСТИЧЕСКИЙ МИР</span>
+                    </h1>
+                    <p class="hero-description">
+                        Погрузитесь в мир будущего, где технологии и приключения сливаются воедино. 
+                        Наш сервер предлагает уникальный опыт игры в стиле киберпанк.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#join" class="btn btn-primary">Присоединиться</a>
+                        <a href="#server" class="btn btn-secondary">Узнать больше</a>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="player-count">12</div>
+                        <div class="stat-label">Игроков онлайн</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50</div>
+                        <div class="stat-label">Максимум игроков</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1.20.1</div>
+                        <div class="stat-label">Версия</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Server Info Section -->
+        <section id="server" class="server-info">
+            <div class="container">
+                <h2 class="section-title">Информация о сервере</h2>
+                <div class="server-grid">
+                    <div class="server-card">
+                        <div class="card-icon">🌐</div>
+                        <h3>Адрес сервера</h3>
+                        <p class="server-address">8b4t.duckdns.org</p>
+                        <p class="server-port">Порт: 55555</p>
+                    </div>
+                    <div class="server-card">
+                        <div class="card-icon">⚡</div>
+                        <h3>Статус</h3>
+                        <p class="status online" id="server-status">Онлайн</p>
+                        <p class="uptime" id="server-uptime">2 дня, 5 часов</p>
+                    </div>
+                    <div class="server-card">
+                        <div class="card-icon">🎮</div>
+                        <h3>Режим игры</h3>
+                        <p>Выживание</p>
+                        <p>Киберпанк тематика</p>
+                    </div>
+                    <div class="server-card">
+                        <div class="card-icon">🛡️</div>
+                        <h3>Защита</h3>
+                        <p>Анти-чит</p>
+                        <p>Модерация 24/7</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Уникальные возможности</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🏙️</div>
+                        <h3>Киберпанк города</h3>
+                        <p>Исследуйте футуристические мегаполисы с неоновыми огнями и высокотехнологичной архитектурой.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <h3>ИИ системы</h3>
+                        <p>Взаимодействуйте с продвинутыми ИИ системами, которые помогут вам в игре.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Энергетические сети</h3>
+                        <p>Создавайте сложные энергетические системы для питания ваших построек.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3>Космические станции</h3>
+                        <p>Стройте орбитальные станции и исследуйте космическое пространство.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔬</div>
+                        <h3>Научные лаборатории</h3>
+                        <p>Проводите эксперименты в высокотехнологичных лабораториях.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌌</div>
+                        <h3>Порталы</h3>
+                        <p>Путешествуйте между измерениями через квантовые порталы.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Join Section -->
+        <section id="join" class="join-section">
+            <div class="container">
+                <h2 class="section-title">Присоединяйтесь к нам</h2>
+                <div class="join-content">
+                    <div class="join-text">
+                        <h3>Готовы к приключениям?</h3>
+                        <p>Создайте аккаунт и начните свое путешествие в мире будущего уже сегодня!</p>
+                        <div class="join-steps">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-text">Зарегистрируйтесь на сайте</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-text">Подключитесь к серверу</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-text">Начните исследовать мир</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="join-actions">
+                        <a href="register.html" class="btn btn-primary btn-large">Регистрация</a>
+                        <a href="login.html" class="btn btn-secondary btn-large">Вход</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>8B4T</h4>
+                    <p>Футуристический Minecraft сервер</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Сервер</h4>
+                    <p>8b4t.duckdns.org:55555</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Поддержка</h4>
+                    <p>Discord: 8B4T_Support</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 8B4T. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="static/js/main.js"></script>
+</body>
+</html>
