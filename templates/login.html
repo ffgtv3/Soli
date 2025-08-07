@@ -16,7 +16,6 @@
             <div class="nav-logo">
                 <a href="{{ url_for('index') }}" class="logo-link">
                     <span class="logo-text">8B4T</span>
-                    <span class="logo-subtitle">FUTURE</span>
                 </a>
             </div>
             <div class="nav-links">
@@ -47,8 +46,6 @@
                 {% endwith %}
 
                 <form method="POST" class="auth-form" id="loginForm">
-                    {{ csrf_token() }}
-                    
                     <div class="form-group">
                         <label for="username" class="form-label">Имя пользователя</label>
                         <div class="input-container">

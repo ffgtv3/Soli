@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-from flask_wtf.csrf import CSRFProtect
+
 import os
 import re
 import secrets
@@ -17,13 +17,14 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_hex(32)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///minecraft_server.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['WTF_CSRF_ENABLED'] = True
+app.config['WTF_CSRF_ENABLED'] = False
 app.config['WTF_CSRF_TIME_LIMIT'] = 3600
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 31536000
 
 # Инициализация расширений
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
-csrf = CSRFProtect(app)
+
 
 # Ограничение запросов для защиты от DDoS
 limiter = Limiter(
@@ -94,26 +95,21 @@ def check_rate_limit(ip_address, action, limit=5, window=300):
     """Проверка ограничений на действия"""
     now = datetime.utcnow()
     window_start = now - timedelta(seconds=window)
-    
+
     if action == 'login':
-        attempts = LoginAttempt.query.filter_by(
-            ip_address=ip_address,
-            success=False,
-            timestamp__gte=window_start
+        attempts = LoginAttempt.query.filter(
+            LoginAttempt.ip_address == ip_address,
+            LoginAttempt.success == False,
+            LoginAttempt.timestamp >= window_start
         ).count()
     else:
         attempts = 0
-    
+
     return attempts < limit
 
 # Middleware для безопасности
 @app.before_request
 def before_request():
-    # Проверка CSRF токена для POST запросов
-    if request.method == 'POST':
-        if not request.is_xhr and not request.path.startswith('/static/'):
-            pass  # CSRF проверка уже включена через CSRFProtect
-    
     # Проверка User-Agent
     user_agent = request.headers.get('User-Agent', '')
     if not user_agent or len(user_agent) < 10:
