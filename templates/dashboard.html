@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель управления - 8B4T</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="{{ url_for('index') }}" class="logo-link">
+                    <span class="logo-text">8B4T</span>
+                    <span class="logo-subtitle">FUTURE</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}" class="nav-link">Главная</a>
+                <a href="{{ url_for('server_info') }}" class="nav-link">Сервер</a>
+                <a href="{{ url_for('logout') }}" class="nav-link">Выход</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="dashboard-main">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">Панель управления</h1>
+                <p class="dashboard-subtitle">Добро пожаловать, {{ user.username }}!</p>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-message flash-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <div class="dashboard-grid">
+                <!-- Информация об аккаунте -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Информация об аккаунте</h3>
+                        <div class="card-icon">👤</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="info-item">
+                            <span class="info-label">Имя пользователя:</span>
+                            <span class="info-value">{{ user.username }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Email:</span>
+                            <span class="info-value">{{ user.email }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Дата регистрации:</span>
+                            <span class="info-value">{{ user.created_at.strftime('%d.%m.%Y') }}</span>
+                        </div>
+                        {% if user.last_login %}
+                        <div class="info-item">
+                            <span class="info-label">Последний вход:</span>
+                            <span class="info-value">{{ user.last_login.strftime('%d.%m.%Y %H:%M') }}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Статус сервера -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Статус сервера</h3>
+                        <div class="card-icon">⚡</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="server-status-widget">
+                            <div class="status-indicator online" id="statusIndicator">
+                                <span class="status-dot"></span>
+                                <span class="status-text" id="statusText">Онлайн</span>
+                            </div>
+                            <div class="server-stats">
+                                <div class="stat-row">
+                                    <span class="stat-label">Игроков:</span>
+                                    <span class="stat-value" id="playerCount">-</span>
+                                </div>
+                                <div class="stat-row">
+                                    <span class="stat-label">Версия:</span>
+                                    <span class="stat-value">1.20.1</span>
+                                </div>
+                                <div class="stat-row">
+                                    <span class="stat-label">Аптайм:</span>
+                                    <span class="stat-value" id="uptime">-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Быстрые действия -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Быстрые действия</h3>
+                        <div class="card-icon">🚀</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="quick-actions">
+                            <button class="action-btn" onclick="copyServerAddress()">
+                                <span class="action-icon">📋</span>
+                                <span class="action-text">Копировать адрес сервера</span>
+                            </button>
+                            <button class="action-btn" onclick="openMinecraft()">
+                                <span class="action-icon">🎮</span>
+                                <span class="action-text">Запустить Minecraft</span>
+                            </button>
+                            <a href="{{ url_for('server_info') }}" class="action-btn">
+                                <span class="action-icon">ℹ️</span>
+                                <span class="action-text">Подробная информация</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Информация о подключении -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Подключение к серверу</h3>
+                        <div class="card-icon">🌐</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="connection-info">
+                            <div class="connection-item">
+                                <span class="connection-label">Адрес:</span>
+                                <span class="connection-value" id="serverAddress">8b4t.duckdns.org</span>
+                                <button class="copy-btn" onclick="copyText('serverAddress')">📋</button>
+                            </div>
+                            <div class="connection-item">
+                                <span class="connection-label">Порт:</span>
+                                <span class="connection-value">55555</span>
+                            </div>
+                            <div class="connection-item">
+                                <span class="connection-label">Версия:</span>
+                                <span class="connection-value">1.20.1</span>
+                            </div>
+                        </div>
+                        <div class="connection-steps">
+                            <h4>Как подключиться:</h4>
+                            <ol>
+                                <li>Запустите Minecraft 1.20.1</li>
+                                <li>Нажмите "Multiplayer"</li>
+                                <li>Нажмите "Add Server"</li>
+                                <li>Введите адрес: <strong>8b4t.duckdns.org:55555</strong></li>
+                                <li>Нажмите "Done" и подключитесь</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Уведомления -->
+            <div class="notifications-section">
+                <h3>Последние обновления</h3>
+                <div class="notifications-list">
+                    <div class="notification-item">
+                        <div class="notification-icon">🆕</div>
+                        <div class="notification-content">
+                            <h4>Новое обновление сервера</h4>
+                            <p>Добавлены новые киберпанк биомы и улучшена производительность.</p>
+                            <span class="notification-time">2 часа назад</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-icon">🎉</div>
+                        <div class="notification-content">
+                            <h4>Событие: Киберпанк фестиваль</h4>
+                            <p>Присоединяйтесь к фестивалю технологий! Специальные награды и активности.</p>
+                            <span class="notification-time">1 день назад</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

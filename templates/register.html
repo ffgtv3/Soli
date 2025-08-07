@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация - 8B4T</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="{{ url_for('index') }}" class="logo-link">
+                    <span class="logo-text">8B4T</span>
+                    <span class="logo-subtitle">FUTURE</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}" class="nav-link">Главная</a>
+                <a href="{{ url_for('login') }}" class="nav-link">Вход</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="auth-main">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1 class="auth-title">Регистрация</h1>
+                    <p class="auth-subtitle">Создайте аккаунт для доступа к серверу</p>
+                </div>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <div class="flash-message flash-{{ category }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+                <form method="POST" class="auth-form" id="registerForm">
+                    {{ csrf_token() }}
+                    
+                    <div class="form-group">
+                        <label for="username" class="form-label">Имя пользователя</label>
+                        <div class="input-container">
+                            <input type="text" id="username" name="username" class="form-input" required>
+                            <div class="input-border"></div>
+                        </div>
+                        <div class="validation-info">
+                            <span class="validation-text">3-20 символов, только буквы, цифры и подчеркивания</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <div class="input-container">
+                            <input type="email" id="email" name="email" class="form-input" required>
+                            <div class="input-border"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="form-label">Пароль</label>
+                        <div class="input-container">
+                            <input type="password" id="password" name="password" class="form-input" required>
+                            <div class="input-border"></div>
+                            <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                                <span class="toggle-icon">👁️</span>
+                            </button>
+                        </div>
+                        <div class="password-strength">
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="strengthFill"></div>
+                            </div>
+                            <span class="strength-text" id="strengthText">Слабый</span>
+                        </div>
+                        <div class="validation-info">
+                            <span class="validation-text">Минимум 8 символов, заглавные и строчные буквы, цифры</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm_password" class="form-label">Подтвердите пароль</label>
+                        <div class="input-container">
+                            <input type="password" id="confirm_password" name="confirm_password" class="form-input" required>
+                            <div class="input-border"></div>
+                            <button type="button" class="password-toggle" onclick="togglePassword('confirm_password')">
+                                <span class="toggle-icon">👁️</span>
+                            </button>
+                        </div>
+                        <div class="password-match" id="passwordMatch">
+                            <span class="match-text">Пароли не совпадают</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <span class="checkmark"></span>
+                            <span class="checkbox-text">
+                                Я согласен с <a href="#" class="link">условиями использования</a> и 
+                                <a href="#" class="link">политикой конфиденциальности</a>
+                            </span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+                        <span class="btn-text">Создать аккаунт</span>
+                        <div class="btn-loader" id="btnLoader"></div>
+                    </button>
+                </form>
+
+                <div class="auth-footer">
+                    <p>Уже есть аккаунт? <a href="{{ url_for('login') }}" class="link">Войти</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+</body>
+</html>

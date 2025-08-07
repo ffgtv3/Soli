@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход - 8B4T</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="{{ url_for('index') }}" class="logo-link">
+                    <span class="logo-text">8B4T</span>
+                    <span class="logo-subtitle">FUTURE</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}" class="nav-link">Главная</a>
+                <a href="{{ url_for('register') }}" class="nav-link">Регистрация</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="auth-main">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1 class="auth-title">Вход в систему</h1>
+                    <p class="auth-subtitle">Добро пожаловать обратно в мир будущего</p>
+                </div>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <div class="flash-message flash-{{ category }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+                <form method="POST" class="auth-form" id="loginForm">
+                    {{ csrf_token() }}
+                    
+                    <div class="form-group">
+                        <label for="username" class="form-label">Имя пользователя</label>
+                        <div class="input-container">
+                            <input type="text" id="username" name="username" class="form-input" required>
+                            <div class="input-border"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="form-label">Пароль</label>
+                        <div class="input-container">
+                            <input type="password" id="password" name="password" class="form-input" required>
+                            <div class="input-border"></div>
+                            <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                                <span class="toggle-icon">👁️</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="remember" name="remember">
+                            <span class="checkmark"></span>
+                            <span class="checkbox-text">Запомнить меня</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+                        <span class="btn-text">Войти</span>
+                        <div class="btn-loader" id="btnLoader"></div>
+                    </button>
+                </form>
+
+                <div class="auth-footer">
+                    <p>Нет аккаунта? <a href="{{ url_for('register') }}" class="link">Зарегистрироваться</a></p>
+                    <p><a href="#" class="link">Забыли пароль?</a></p>
+                </div>
+
+                <div class="security-info">
+                    <div class="security-icon">🛡️</div>
+                    <p>Ваша безопасность - наш приоритет. Все данные защищены шифрованием.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+</body>
+</html>
